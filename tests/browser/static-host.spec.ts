@@ -24,7 +24,11 @@ test('production assets, workers and codecs work under a static hosting subdirec
         response.writeHead(404).end();
         return;
       }
-      const file = path.resolve(root, pathname.slice('/lumina/'.length) || 'index.html');
+      const relativePath = pathname.slice('/lumina/'.length);
+      const file = path.resolve(
+        root,
+        relativePath === 'viewer' ? 'index.html' : relativePath || 'index.html',
+      );
       if (!file.startsWith(root + path.sep)) {
         response.writeHead(404).end();
         return;
@@ -49,16 +53,20 @@ test('production assets, workers and codecs work under a static hosting subdirec
     if (request.method() !== 'GET') uploads.push(request.url());
   });
   try {
-    await page.goto(`${origin}/lumina/#/viewer`);
+    await page.goto(`${origin}/lumina/viewer`);
     await expect(
       page.getByRole('heading', { name: 'Your studies. A new perspective.' }),
     ).toBeVisible();
+    expect(new URL(page.url()).pathname).toBe('/lumina/');
+    expect(new URL(page.url()).hash).toBe('');
     await page.getByLabel('Open DICOM files').setInputFiles({
       name: 'compressed.dcm',
       mimeType: 'application/dicom',
       buffer: dicomFixture({ compressed: true }),
     });
     await expect(page.getByTestId('viewport')).toBeVisible();
+    expect(new URL(page.url()).pathname).toBe('/lumina/viewer');
+    expect(new URL(page.url()).hash).toBe('');
     await expect(page.getByTestId('viewport-loading')).toHaveCount(0);
     await expect(page.getByTestId('viewport-error')).toHaveCount(0);
     expect(failed).toEqual([]);

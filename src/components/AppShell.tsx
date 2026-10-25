@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react';
 import { useSession } from '../features/session/SessionProvider';
 import { useFileImport } from '../features/import/FileImportProvider';
-import { useHashRoute } from '../hooks/useHashRoute';
+import { usePathRoute } from '../hooks/usePathRoute';
 import { cn } from '../lib/classes';
 import HomePage from '../features/home/HomePage';
 import ImportFeedback from '../features/import/ImportFeedback';
@@ -12,7 +12,7 @@ const Viewer = lazy(() => import('../features/viewer/Viewer'));
 export default function AppShell() {
   const { studies, notify } = useSession();
   const { dragBindings } = useFileImport();
-  const viewer = useHashRoute(studies.length > 0);
+  const viewer = usePathRoute(studies.length > 0);
   return (
     <div
       data-testid="app-shell"

@@ -1,9 +1,16 @@
 import LuminaLogo from './LuminaLogo';
 import { cn } from '../lib/classes';
+import { appPath, navigate } from '../lib/navigation';
 export default function Brand({ compact = false }: { compact?: boolean }) {
   return (
     <a
-      href="#/"
+      href={appPath('/')}
+      onClick={(event) => {
+        if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey)
+          return;
+        event.preventDefault();
+        navigate('/');
+      }}
       aria-label="Lumina home"
       className={cn(
         'flex shrink-0 items-center font-bold tracking-tight',

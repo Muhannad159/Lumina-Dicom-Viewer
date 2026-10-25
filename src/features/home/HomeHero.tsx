@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react';
 import ImportButtons from '../import/ImportButtons';
 import { useSession } from '../session/SessionProvider';
+import { appPath, navigate } from '../../lib/navigation';
 export default function HomeHero() {
   const { studies } = useSession();
   return (
@@ -17,7 +18,22 @@ export default function HomeHero() {
         <ImportButtons />
       </div>
       {studies.length > 0 && (
-        <a href="#/viewer" className="mt-5 inline-flex items-center gap-2 text-xs text-accent">
+        <a
+          href={appPath('/viewer')}
+          onClick={(event) => {
+            if (
+              event.button !== 0 ||
+              event.metaKey ||
+              event.ctrlKey ||
+              event.shiftKey ||
+              event.altKey
+            )
+              return;
+            event.preventDefault();
+            navigate('/viewer');
+          }}
+          className="mt-5 inline-flex items-center gap-2 text-xs text-accent"
+        >
           Continue your session · {studies.length} {studies.length === 1 ? 'study' : 'studies'}
           <ArrowRight size={15} />
         </a>

@@ -5,6 +5,7 @@ import ThemePicker from '../features/theme/ThemePicker';
 import ImportButtons from '../features/import/ImportButtons';
 import { useSession } from '../features/session/SessionProvider';
 import { cn } from '../lib/classes';
+import { navigate } from '../lib/navigation';
 export default function AppHeader({ viewer }: { viewer: boolean }) {
   const { studies, busy, clearSession } = useSession();
   return (
@@ -25,9 +26,7 @@ export default function AppHeader({ viewer }: { viewer: boolean }) {
           <>
             <IconButton
               label="Back to home"
-              onClick={() => {
-                location.hash = '/';
-              }}
+              onClick={() => navigate('/')}
               className="max-sm:hidden"
             >
               <ArrowLeft size={18} />

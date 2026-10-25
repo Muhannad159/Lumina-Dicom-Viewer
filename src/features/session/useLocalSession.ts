@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { LocalStudy } from '../dicom/types';
+import { navigate } from '../../lib/navigation';
 
 function reconcile(previous: LocalStudy[], next: LocalStudy[]) {
   return next.map((study) => {
@@ -31,12 +32,12 @@ export function useLocalSession(notify: (message: string) => void) {
   );
   const commit = useCallback((catalog: LocalStudy[]) => {
     setStudies((previous) => reconcile(previous, catalog));
-    location.hash = '/viewer';
+    navigate('/viewer');
   }, []);
   const clear = useCallback(() => {
     setStudies([]);
     setClearing(true);
-    location.hash = '/';
+    navigate('/');
   }, []);
   // The effect runs after viewports unmount, so their rendering resources are no longer in use.
   useEffect(() => {

@@ -87,7 +87,7 @@ npm run build
 npm run preview
 ```
 
-Deploy the contents of `dist/` to any static HTTP(S) host. Hash routes (`#/` and `#/viewer`) need no server rewrite. The default relative asset base supports a subdirectory. To set a fixed base explicitly:
+Deploy the contents of `dist/` to any static HTTP(S) host. The clean viewer route (`/viewer`) must fall back to `index.html`; `vercel.json` configures this for Vercel. The default relative asset base supports a subdirectory. To set a fixed base explicitly:
 
 ```powershell
 $env:VITE_BASE_PATH = '/dicom/'
@@ -105,7 +105,7 @@ No deployment or service worker is configured. Images stay local, but loading/re
 src/
   App.tsx                    Provider composition only
   components/                App shell/header and reusable Button, IconButton, Modal, Popover, Select
-  hooks/                     Hash navigation and notifications
+  hooks/                     Path navigation and notifications
   features/home/             Home page, hero, drop zone, feature cards
   features/import/           Import transactions, file selection/drop handling, progress and reports
   features/session/          Typed session context, catalog ownership and resource cleanup
