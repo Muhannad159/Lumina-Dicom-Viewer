@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+@theme inline {
+  --color-background: var(--bg);
+  --color-foreground: var(--text);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-soft: var(--accent-soft);
+  --color-panel: var(--panel);
+  --color-raised: var(--panel-raised);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-line: var(--line);
+  --color-hero-glow: var(--hero-glow);
+  --color-theme: var(--shadow);
+  --font-sans: 'Roboto', sans-serif;
+}
+
+@custom-variant compact {
+  @media (width < 48rem), (orientation: portrait) {
+    @slot;
+  }
+}
+@custom-variant fullscreen (&:fullscreen);
+
+:root,
+[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #11171b;
+  --panel: #171e23;
+  --panel-raised: #1c252b;
+  --text: #f0f3f3;
+  --muted: #8c9ba3;
+  --faint: #64737b;
+  --line: #29353c;
+  --accent: #91d8c8;
+  --accent-ink: #112e28;
+  --accent-soft: #91d8c810;
+  --hero-glow: #47796b15;
+  --shadow: #00000025;
+}
+[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f6f8f8;
+  --panel: #ffffff;
+  --panel-raised: #edf3f1;
+  --text: #20332e;
+  --muted: #62766e;
+  --faint: #73867f;
+  --line: #d8e2dd;
+  --accent: #23735e;
+  --accent-ink: #ffffff;
+  --accent-soft: #23735e0c;
+  --hero-glow: #89b9a415;
+  --shadow: #2642380a;
+}
+[data-theme='blue'] {
+  color-scheme: dark;
+  --bg: #0b1729;
+  --panel: #101f34;
+  --panel-raised: #182b44;
+  --text: #edf4ff;
+  --muted: #8fabc9;
+  --faint: #6788ad;
+  --line: #233b58;
+  --accent: #87bbff;
+  --accent-ink: #102945;
+  --accent-soft: #87bbff10;
+  --hero-glow: #2d65b820;
+  --shadow: #00091935;
+}
+[data-theme='green'] {
+  color-scheme: dark;
+  --bg: #0b1b17;
+  --panel: #10261f;
+  --panel-raised: #173328;
+  --text: #edf8ef;
+  --muted: #8eac9a;
+  --faint: #6d907c;
+  --line: #264537;
+  --accent: #b0dc8e;
+  --accent-ink: #1a3216;
+  --accent-soft: #b0dc8e10;
+  --hero-glow: #6b9d3820;
+  --shadow: #00120a35;
+}
+
+@layer base {
+  body {
+    min-width: 320px;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-sans);
+    font-size: 14px;
+    -webkit-font-smoothing: antialiased;
+  }
+  button,
+  summary,
+  select {
+    cursor: pointer;
+  }
+  button,
+  a,
+  select,
+  input {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+    outline-offset: 3px;
+  }
+  :focus-visible {
+    outline: 2px solid var(--accent);
+  }
+  ::selection {
+    background: var(--accent);
+    color: var(--accent-ink);
+  }
+  ::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: var(--line);
+    border-radius: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+}
