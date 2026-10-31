@@ -2,6 +2,10 @@
 
 Lumina is a browser-based DICOM workspace for privately importing, organizing, viewing, comparing, and measuring medical images. Files are processed locally in the browser; the app has no accounts, uploads, analytics, or application backend.
 
+## Technology
+
+![React 19](https://img.shields.io/badge/React-19-149ECA?style=for-the-badge&logo=react&logoColor=white) ![TypeScript 5.9](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript&logoColor=white) ![Vite 6](https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite&logoColor=white) ![Tailwind CSS 4](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white) ![Cornerstone.js 4.15](https://img.shields.io/badge/Cornerstone.js-4.15-0F766E?style=for-the-badge)
+
 ## Screenshots
 
 ![Lumina home page](docs/images/lumina-home.png)
@@ -10,7 +14,7 @@ Lumina is a browser-based DICOM workspace for privately importing, organizing, v
 | :---: | :---: |
 | ![Lumina viewer with two viewports](docs/images/lumina-two-viewports.png) | ![Lumina axial, sagittal, and coronal MPR views](docs/images/lumina-mpr.png) |
 
-The screenshots use synthetic DICOM fixtures and contain no patient data.
+The screenshots show anonymized demonstration studies.
 
 ## Features
 
@@ -25,17 +29,6 @@ The screenshots use synthetic DICOM fixtures and contain no patient data.
 - Bookmark key images and return to an exact series and frame during the current session.
 - Export measurement summaries as CSV or JSON and download viewport screenshots as PNG.
 - Switch between Dark, Light, Blue, and Green themes.
-
-## Run locally
-
-Use Node.js 20.19 or a supported newer LTS release.
-
-```sh
-npm ci
-npm run dev
-```
-
-Open the local URL printed by Vite, normally `http://127.0.0.1:5173`.
 
 ## Using the workspace
 
@@ -72,3 +65,14 @@ Touch devices use one finger for the selected tool and two fingers to pan. Keybo
 Lumina accepts DICOM Part 10 images using common uncompressed, RLE, JPEG, JPEG-LS, JPEG 2000, and HTJ2K transfer syntaxes supported by the bundled Cornerstone loader. It handles single-frame images and supported multiframe stacks. DICOMDIR acts as an index, so import its containing folder to load the referenced image files.
 
 MPR is available for compatible single-frame grayscale series with consistent spatial geometry and at least two slices. Unsupported objects or decoding failures are reported instead of being silently added. All image processing stays in the browser, so the practical size of a session depends on the device's available memory and graphics support.
+
+## Development
+
+Use Node.js 20.19 or a supported newer LTS release.
+
+```sh
+npm ci
+npm run dev
+```
+
+Open the local URL printed by Vite, normally `http://127.0.0.1:5173`.
